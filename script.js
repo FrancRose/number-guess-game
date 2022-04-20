@@ -8,6 +8,10 @@ const displayMessage = function (message) {
     document.querySelector('.message').textContent = message;
 }
 
+const textQuery = function (item,text) {
+    document.querySelector(item).textContent = text;
+}
+
 document.querySelector('.check').addEventListener('click', function() {
     const guess = Number(document.querySelector('.guess').value);
     console.log(typeof guess);
@@ -20,14 +24,17 @@ document.querySelector('.check').addEventListener('click', function() {
     } else if (guess === secretNumber) {
         //document.querySelector('.message').textContent = 'Correct Number';
         displayMessage('Correct Number!')
-        document.querySelector('.number').textContent = secretNumber;
+
+        textQuery('.number', secretNumber);
+        // document.querySelector('.number').textContent = secretNumber;
         
         document.querySelector('body').style.backgroundColor ='#60b347';
         document.querySelector('.number').style.width = '30rem';
 
         if(score > highScore) {
             highScore = score;
-            document.querySelector('.highscore').textContent = highScore;
+            textQuery('.highscore', highScore);
+            // document.querySelector('.highscore').textContent = highScore;
         }
     // Wrong Guess
     } else if (guess !== secretNumber) {
@@ -35,11 +42,13 @@ document.querySelector('.check').addEventListener('click', function() {
             displayMessage(guess > secretNumber ? 'Too High!' : 'Too Low!');
             // document.querySelector('.message').textContent = guess > secretNumber ? 'Too High' : 'Too Low!';
             score--;
-            document.querySelector('.score').textContent = score;
+            textQuery('.score', score);
+            // document.querySelector('.score').textContent = score;
         } else {
             displayMessage('You lost the game =(');
             // document.querySelector('.message').textContent = 'You lost the game';
-            document.querySelector('.score').textContent = 0;
+            textQuery('.score', 0);
+            // document.querySelector('.score').textContent = 0;
         }
     }
     //High guess
@@ -72,8 +81,10 @@ document.querySelector('.again').addEventListener('click', function() {
     secretNumber = Math.trunc(Math.random() * 20) + 1;
     displayMessage('Start Guessing....')
     // document.querySelector('.message').textContent = 'Start Guessing...';
-    document.querySelector('.score').textContent = score;
-    document.querySelector('.number').textContent = '?';
+    textQuery('.score', score);
+    // document.querySelector('.score').textContent = score;
+    textQuery('.number', '?')
+    // document.querySelector('.number').textContent = '?';
     document.querySelector('.guess').value = '';
 
     // RESET STYLES ---------------------------------------------
